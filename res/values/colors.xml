@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <color name="yellow">#ffffbb33</color>
+    <color name="red">#ffcc0000</color>
+    <color name="blue">#ff0099cc</color>
+    <color name="board_backgound">#ff33b5e5</color>
+    <color name="board_hilite">#33ffffff</color>
+    <color name="board_light">#6433b5e5</color>
+    <color name="board_dark">#640099cc</color>
+    <color name="board_selected">#64ffffff</color>
+</resources>
