@@ -3,11 +3,15 @@ package nl.bjornhoogland.connect4;
 import nl.bjornhoogland.connect4.gamelogic.GameController;
 import nl.bjornhoogland.connect4.gamelogic.Piece;
 import nl.bjornhoogland.connect4.gamelogic.Position;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.graphics.Path;
 import android.graphics.Path.Direction;
+import android.graphics.RadialGradient;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -27,8 +31,6 @@ public class PlayBoard extends View{
 	private float height;	// height of one tile
 	private int selX;		// X index of selection
 	private final Rect selRect = new Rect();
-	private boolean redWins = false;
-	private boolean yellowWins = false;
 
 	public PlayBoard(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -78,6 +80,14 @@ public class PlayBoard extends View{
 		red.setColor(getResources().getColor(R.color.red));
 		Paint yellow = new Paint(Paint.ANTI_ALIAS_FLAG);
 		yellow.setColor(getResources().getColor(R.color.yellow));
+		
+		/* outer glow test
+		RadialGradient gradient = new RadialGradient(width/2+width*3, height/2, height * 0.39f, 0xEEFFFFFF,
+	            0x00FFFFFF, android.graphics.Shader.TileMode.REPEAT);
+		Paint glow = new Paint(Paint.ANTI_ALIAS_FLAG);
+		glow.setShader(gradient);
+	    Path glowPath = new Path();*/
+	    
 		Paint empty = new Paint(Paint.ANTI_ALIAS_FLAG);
 		empty.setColor(getResources().getColor(R.color.blue));
 		Path yellowChips = new Path();
@@ -100,15 +110,23 @@ public class PlayBoard extends View{
 				}
 			}
 		}
+		//canvas.drawCircle(300, 200, 300, glow);
+		//canvas.drawRect(width*3, 0, width*4, sqSize, glow);
+		//glowPath.addCircle(3*width+x, 0 * height+y, radius*1.8f, Direction.CW);
+		//canvas.drawPath(glowPath, glow);
+		
 		canvas.drawPath(yellowChips, yellow);
 		canvas.drawPath(redChips, red);
 		canvas.drawPath(emptyChips, empty);
+		
 		
 		// Draw the selection...
 		Log.d(TAG, "selRect=" + selRect);
 		Paint selected = new Paint();
 		selected.setColor(getResources().getColor(R.color.board_selected));
 		canvas.drawRect(selRect, selected);
+		
+		/* Replaced by restart pop up
 		if(redWins){
 			red.setTextSize(44);
 			canvas.drawText("Rood wint!", 20, 40, red);
@@ -116,7 +134,7 @@ public class PlayBoard extends View{
 		if(yellowWins){
 			yellow.setTextSize(44);
 			canvas.drawText("Geel wint!", 20, 40, yellow);
-		}
+		} */
 	}
 	
 	@Override
@@ -165,9 +183,9 @@ public class PlayBoard extends View{
 			pos.makeMove(sq);
 			if(ctrl.updateScore(pos, sq)){
 				if(pos.yellowMove){
-					redWins = true;
+					openWinDialog("Red wins!");
 				} else {
-					yellowWins = true;
+					openWinDialog("Yellow wins!");
 				}
 				invalidate();
 			}
@@ -182,6 +200,24 @@ public class PlayBoard extends View{
     final public void setPosition(Position pos) {
         this.pos = new Position(pos);
         invalidate();
+    }
+    
+    private void openWinDialog(String message) {
+    	new AlertDialog.Builder(this.getContext())
+    	.setMessage(message)
+    	.setNeutralButton("Restart", 
+			new DialogInterface.OnClickListener() {
+				public void onClick(DialogInterface dialog, int which) {
+					restartGame();
+				}
+			})
+    	.show();
+    }
+    
+    private void restartGame(){
+    	pos = new Position();
+		ctrl = new GameController(this);
+		invalidate();
     }
 
 }

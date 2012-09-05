@@ -1,7 +1,5 @@
 package nl.bjornhoogland.connect4;
 
-import nl.bjornhoogland.connect4.gamelogic.GameController;
-import nl.bjornhoogland.connect4.gamelogic.Position;
 import android.app.Activity;
 import android.os.Bundle;
 

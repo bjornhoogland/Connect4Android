@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme is the default theme. -->
+    <style name="Theme" parent="android:style/Theme" />
+
+    <!-- Variation on the Light theme that turns off the title -->
+    <style name="Theme.Connect4" parent="android:style/Theme.Light">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <!-- Start with the Holographic Light theme -->
+    <style name="Theme.Connect4.Home" parent="style/Theme.Connect4">
+        <item name="android:windowBackground">@drawable/background_noise</item>
+    </style>
+    
+    <style name="ActionBarCompat">
+        <item name="android:id">@id/actionbar_compat</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">@dimen/actionbar_compat_height</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:background">@drawable/actionbar_compat_background</item>
+    </style>
+</resources>
