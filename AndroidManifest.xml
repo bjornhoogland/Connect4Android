@@ -20,6 +20,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".About"
+            android:theme="@style/Theme.Connect4.Home"
+            android:label="@string/about_title" >
+		</activity>
+		<activity android:name=".Game"
+            android:theme="@style/Theme.Connect4.Home"
+            android:label="@string/title" >
+		</activity>
     </application>
 
 </manifest>

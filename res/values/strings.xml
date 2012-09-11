@@ -3,5 +3,19 @@
 
     <string name="app_name">Connect 4</string>
     <string name="title">Connect 4</string>
+    
+    <string name="continue_label">Continue</string>
+    <string name="new_game_label">New Game</string>
+    <string name="about_label">About</string>
+    <string name="exit_label">Exit</string>
+    
+    <string name="about_title">About</string>
+    <string name="about_text">&lt;h1>About&lt;/h1>
+        Connect Four is a two-player game in which the players first choose a color and then take turns dropping colored discs
+        from the top into a seven-column, six-row vertically-suspended grid. The pieces fall straight down, occupying the next
+        available space within the column. The object of the game is to connect four of one\'s own discs of the same color next
+        to each other vertically, horizontally, or diagonally before your opponent. (Source: Wikipedia)
+        &lt;h1>App Author&lt;/h1>
+        Bjorn Hoogland (bjornhoogland@gmail.com)</string>
 
 </resources>

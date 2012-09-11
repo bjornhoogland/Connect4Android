@@ -1,19 +1,42 @@
 package nl.bjornhoogland.connect4;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
 
-public class Connect4 extends Activity {
-	PlayBoard pb;
+public class Connect4 extends Activity implements OnClickListener{
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.home);
         
-        setContentView(R.layout.main);
-        pb = (PlayBoard)findViewById(R.id.playboard);
-        
-        pb.setFocusable(true);
+        // Set up click listeners for all the buttons
+        View continueButton = findViewById(R.id.continue_button);
+        continueButton.setOnClickListener(this);
+        View newButton = findViewById(R.id.new_game_button);
+        newButton.setOnClickListener(this);
+        View aboutButton = findViewById(R.id.about_button);
+        aboutButton.setOnClickListener(this);
+        View exitButton = findViewById(R.id.exit_button);
+        exitButton.setOnClickListener(this);
     }
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.new_game_button:
+			Intent gameIntent = new Intent(this, Game.class); startActivity(gameIntent);
+			break;
+		case R.id.about_button:
+			Intent aboutIntent = new Intent(this, About.class); startActivity(aboutIntent);
+			break;
+		case R.id.exit_button:
+			finish();
+			break;
+		}
+	}
 }

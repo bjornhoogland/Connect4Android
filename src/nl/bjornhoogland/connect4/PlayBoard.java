@@ -38,6 +38,19 @@ public class PlayBoard extends View{
 		ctrl = new GameController(this);
 	}
 	
+	/*
+	 * Don't use the whole screen. Needed to center the view in a layout.
+	 */
+	@Override
+    protected void onMeasure (int widthMeasureSpec, int heightMeasureSpec){
+       super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
+       int parentWidth = MeasureSpec.getSize(widthMeasureSpec);
+       int parentHeight = MeasureSpec.getSize(heightMeasureSpec);
+       int square = Math.min(parentWidth, parentHeight);
+       this.setMeasuredDimension(square, square);
+    }
+	
 	@Override
 	protected void onSizeChanged(int w, int h, int oldw, int oldh) {
 		sqSize = Math.min(w, h);
